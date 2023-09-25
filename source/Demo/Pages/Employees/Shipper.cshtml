@@ -1,0 +1,57 @@
+﻿@page
+@model Demo.Pages.Employees.ShipperModel
+@{
+	decimal totalCost = 0;
+}
+
+<br>
+<h2>Thông tin giao hàng</h2>
+
+<form method="get">
+	<div class="form-group">
+		<input type="text" name="searchQuery" class="form-control" placeholder="Tìm kiếm trà sữa" value="@Model.SearchQuery" />
+	</div>
+	<button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+</form>
+<br />
+
+<strong>Khách hàng: </strong>@Model.Name
+<br />
+<strong>Địa chỉ: </strong>@Model.Address
+<br />
+<strong>Số điện thoại: </strong>@Model.PhoneNumber
+<br />
+<br />
+
+<table class="table">
+	<thread>
+		<tr>
+			<th>Hình ảnh</th>
+			<th>Tên trà sữa</th>
+			<th>Giá</th>
+			<th>Số lượng</th>
+			<th>Tổng giá</th>
+		</tr>
+	</thread>
+	<tbody>
+		@foreach (var item in Model.listMilkTeas)
+		{
+			<tr data-id="@item.id">
+				<td><img src="~/images/@item.img" alt="@item.img" style="width: 50px; height: 50px;" /></td>
+				<td>@item.name</td>
+				<td>@item.cost</td>
+				<td>@item.create_at</td>
+				<td>@(int.Parse(item.cost) * int.Parse(item.create_at))</td>
+			</tr>
+			totalCost += decimal.Parse(item.cost) * decimal.Parse(item.create_at);
+		}
+	</tbody>
+</table>
+
+<div style="position: fixed; bottom: 70px; right: 20px;">
+	<strong>Tổng giá tiền: @totalCost </strong>
+	<br />
+	<form method="POST">
+		<button class="btn btn-success btn-lg" href="/Cart/Info">Giao hàng thành công</button>
+	</form>
+</div>

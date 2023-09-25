@@ -1,0 +1,41 @@
+﻿@page
+@model Demo.Pages.MilkTea.IndexManageModel
+@{
+}
+
+<br>
+<h2>Danh sách trà sữa</h2>
+<form method="get">
+	<div class="form-group">
+		<input type="text" name="searchQuery" class="form-control" placeholder="Tìm kiếm trà sữa" value="@Model.SearchQuery" />
+	</div>
+	<button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+</form>
+<br />
+<a class='btn btn-primary btn-sm' href='/MilkTea/Create'>Thêm trà sữa</a>
+<table class="table">
+	<thread>
+		<tr>
+			<th>Hình ảnh</th>
+			<th>Tên trà sữa</th>
+			<th>Giá</th>
+			<th>Được thêm vào ngày</th>
+			<th>Thực thi</th>
+		</tr>
+	</thread>
+	<tbody>
+		@foreach (var item in Model.listMilkTeas)
+		{
+			<tr>
+				<td><img src="~/images/@item.img" alt="@item.img" style="width: 50px; height: 50px;" /></td>
+				<td>@item.name</td>
+				<td>@item.cost</td>
+				<td>@item.create_at</td>
+				<td>
+					<a class="btn btn-primary btn-sm" href="/MilkTea/Edit?id=@item.id">Chỉnh sửa</a>
+					<a class="btn btn-danger btn-sm" href="/MilkTea/Delete?id=@item.id">Xoá</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

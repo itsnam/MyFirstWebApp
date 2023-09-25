@@ -1,0 +1,44 @@
+﻿@page
+@model Demo.Pages.Employees.IndexModel
+@{
+}
+
+<br>
+<h2>Danh sách nhân viên</h2>
+<form method="get">
+    <div class="form-group">
+        <input type="text" name="searchQuery" class="form-control" placeholder="Tìm kiếm nhân viên" value="@Model.SearchQuery" />
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+</form>
+<br />
+<a class='btn btn-primary btn-sm' href='/Employees/Create'>Thêm nhân viên</a>
+<table class = "table">
+	<thread>
+		<tr>
+			<th>Họ tên</th>
+			<th>Tuổi</th>
+			<th>Email</th>
+			<th>Số điện thoại</th>
+			<th>Bộ phận</th>
+			<th>Được thêm vào ngày</th>
+			<th>Thực thi</th>
+		</tr>
+	</thread>
+	<tbody>
+		@foreach(var item in Model.listEmployees){
+			<tr>
+				<td>@item.name</td>
+				<td>@item.age</td>
+				<td>@item.email</td>
+				<td>@item.phone</td>
+				<td>@item.job</td>
+				<td>@item.create_at</td>
+				<td>
+					<a class = "btn btn-primary btn-sm" href = "/Employees/Edit?id=@item.id">Chỉnh sửa</a>
+					<a class = "btn btn-danger btn-sm" href = "/Employees/Delete?id=@item.id">Xoá</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

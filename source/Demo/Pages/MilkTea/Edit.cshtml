@@ -1,0 +1,67 @@
+﻿@page
+@model Demo.Pages.MilkTea.EditModel
+@{
+}
+
+<br>
+<h2>Chỉnh sửa trà sữa</h2>
+
+@if (Model.failMessage.Length > 0)
+{
+	<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+		<strong>@Model.failMessage</strong>
+		<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+	</div>
+}
+
+<form method="POST">
+	<input type="hidden" name="id" value="@Model.milkteaInfo.id">
+	<div class="row mb-3">
+		<label class="col-sm-3 col-form-label">Hình ảnh</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="img" value="@Model.milkteaInfo.img" readonly>
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		<label class="col-sm-3 col-form-label">Hoặc thay đổi hình ảnh</label>
+		<div class="col-sm-6">
+			<input type="file" class="form-control-file" name="img1" accept="image/*">
+		</div>
+	</div>
+
+	<div class="row mb-3">
+		<label class="col-sm-3 col-form-label">Tên</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="name" value="@Model.milkteaInfo.name">
+		</div>
+	</div>
+	<div class="row mb-3">
+		<label class="col-sm-3 col-form-label">Giá</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="cost" value="@Model.milkteaInfo.cost">
+		</div>
+	</div>
+
+	@if (Model.completeMessage.Length > 0)
+	{
+		<div class="row mb-3">
+			<div class="col-sm-9">
+				<div class='alert alert-success alert-dismissible fade show' role='alert'>
+					<strong>@Model.completeMessage</strong>
+					<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+				</div>
+			</div>
+		</div>
+	}
+
+	<div class="row mb-3">
+		<div class="offset-sm-3 col-sm-3 d-grid">
+			<button type="submit" class="btn btn-primary"> Sửa </button>
+		</div>
+		<div class="col-sm-3 d-grid">
+			<a class="btn btn-outline-primary" href="/Milktea/IndexManage" role="button">Huỷ</a>
+		</div>
+	</div>
+
+</form>

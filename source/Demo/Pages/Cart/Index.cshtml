@@ -1,0 +1,55 @@
+﻿@page
+@model Demo.Pages.Cart.IndexModel
+@{
+    decimal totalCost = 0;
+}
+
+<br>
+<h2>Giỏ hàng</h2>
+<form method="get">
+	<div class="form-group">
+		<input type="text" name="searchQuery" class="form-control" placeholder="Tìm kiếm trà sữa" value="@Model.SearchQuery" />
+	</div>
+	<button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+</form>
+<br />
+<a class='btn btn-success btn-lg' href='/MilkTea/Index'>Quay lại danh sách trà sữa</a>
+<table class="table">
+	<thread>
+		<tr>
+			<th>Hình ảnh</th>
+			<th>Tên trà sữa</th>
+			<th>Giá</th>
+			<th>Số lượng</th>
+			<th>Tổng giá</th>
+			<th>Thực thi</th>
+		</tr>
+	</thread>
+	<tbody>
+		@foreach (var item in Model.listMilkTeas)
+		{
+			<tr data-id="@item.id">
+				<td><img src="~/images/@item.img" alt="@item.img" style="width: 50px; height: 50px;" /></td>
+				<td>@item.name</td>
+				<td>@item.cost</td>
+				<td>@item.create_at</td>
+				<td>@(int.Parse(item.cost) * int.Parse(item.create_at))</td>
+				<td>
+					<a class="btn btn-primary btn-sm" href="/Cart/Edit?id=@item.id">Cập nhật số lượng</a>
+					<a class="btn btn-danger btn-sm" href="/Cart/Delete?id=@item.id">Xoá</a>
+				</td>
+			</tr>
+			totalCost += decimal.Parse(item.cost) * decimal.Parse(item.create_at);
+		}
+	</tbody>
+</table>
+
+<div style="position: fixed; bottom: 70px; right: 20px;">
+    <strong>Tổng giá tiền: @totalCost </strong>
+	<br />
+	<a class="btn btn-success btn-lg" href="/Cart/Info">Bước tiếp theo</a>
+</div>
+
+<form method="post">
+	<button class="btn btn-danger btn-sm" style="position: fixed; bottom: 70px; left: 100px;"> Xoá giỏ hàng </button>
+</form>
